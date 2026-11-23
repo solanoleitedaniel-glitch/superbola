@@ -1,0 +1,12 @@
+SUPER BOLA — CORREÇÃO DE DEMONSTRAÇÃO
+
+Substitua os arquivos do repositório pelo conteúdo deste ZIP (sem criar pasta extra).
+Na Vercel mantenha em Production:
+VITE_DEMO_MODE=true
+VITE_AUTH_ENABLED=false
+
+Esta versão evita o PGlite nas funções de cardápio, conta visitante, endereços e prévia de compra.
+O carrinho continua no navegador. Endereços de exemplo são temporários e podem desaparecer entre requisições; pedidos reais estão bloqueados.
+O painel administrativo e operações de banco de dados não fazem parte da demonstração.
+
+ATENÇÃO: esta versão não foi validada por um teste de build completo; valide na Vercel antes de apresentar a clientes.
