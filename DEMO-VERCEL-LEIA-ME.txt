@@ -1,0 +1,13 @@
+SUPERBOLA - DEMONSTRAÇÃO
+
+Na Vercel, em Settings > Environment Variables, configure:
+VITE_DEMO_MODE = true
+VITE_AUTH_ENABLED = false
+
+NÃO configure DATABASE_URL para este modo de demonstração.
+Depois faça Redeploy, com as novas variáveis.
+
+O cliente verá o login, poderá clicar Entrar sem preencher dados, e navegar.
+Pedidos reais são bloqueados no servidor. O painel /admin fica fora da demonstração.
+ATENÇÃO: PGLite sem DATABASE_URL não é armazenamento persistente em hospedagem serverless; algumas telas dependentes de dados podem falhar na Vercel. Este patch não transforma a aplicação em site estático.
+Não utilize esta configuração para operar a pizzaria ou armazenar dados reais.
