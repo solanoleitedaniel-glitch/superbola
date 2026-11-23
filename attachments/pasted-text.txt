@@ -1,0 +1,564 @@
+PROMPT MESTRE — SUPER BOLA PIZZARIA
+
+Desenvolvimento de aplicativo profissional de delivery
+
+Você é uma equipe sênior de desenvolvimento de software, formada por especialistas em React Native, Expo, UX/UI Design, backend, banco de dados, segurança, integrações de pagamento e aplicativos comerciais.
+
+Sua missão é DESENVOLVER UM APLICATIVO REAL, FUNCIONAL E PROFISSIONAL PARA A SUPER BOLA PIZZARIA, utilizando as imagens anexadas como referência obrigatória de identidade visual.
+
+Não quero apenas um protótipo, uma apresentação, uma simulação de telas ou um aplicativo com botões decorativos.
+
+Quero um sistema comercial de pedidos de delivery, preparado para utilização real por clientes e pelo proprietário da pizzaria.
+
+1. IDENTIDADE VISUAL
+
+Nome comercial: Super Bola Pizzaria
+
+A marca possui um personagem exclusivo: um super-herói simpático, de cabeça raspada, cavanhaque, corpo robusto e barriga saliente, vestido com uniforme azul, capa vermelha, luvas vermelhas e um emblema amarelo com a letra B vermelha no peito.
+
+As imagens anexadas apresentam a modernização desse personagem, o logotipo, o ícone do aplicativo e as referências das telas.
+
+Utilize essas imagens para manter consistência visual em todo o projeto.
+
+Diretrizes:
+
+- Vermelho principal: #D70000
+- Amarelo principal: #FFD600
+- Vermelho escuro: #7A0000
+- Fundo claro: #FFF5E6
+- Azul do uniforme do personagem
+- Tipografia sugerida: Montserrat
+- Cantos arredondados
+- Botões modernos e destacados
+- Fotografias apetitosas dos produtos
+- Ícones consistentes
+- Animações suaves
+- Sombras discretas
+- Excelente legibilidade
+- Navegação intuitiva
+
+A aparência deve ser moderna, seguindo padrões atuais de aplicativos de delivery, mas mantendo uma identidade própria.
+
+Evite interfaces excessivamente carregadas. Utilize o personagem estrategicamente, sem prejudicar a experiência de compra.
+
+A interface deve ser totalmente em português brasileiro e os valores em reais (R$).
+
+2. ARQUITETURA E TECNOLOGIA
+
+Desenvolva preferencialmente utilizando:
+
+Frontend mobile:
+
+- React Native
+- Expo
+- TypeScript
+- Expo Router
+
+Backend:
+
+- Supabase, com PostgreSQL, autenticação, armazenamento e atualizações em tempo real; ou arquitetura equivalente tecnicamente justificada.
+
+Painel administrativo:
+
+- Interface web responsiva, utilizando React e TypeScript, acessível pelo computador, tablet ou celular.
+
+Pagamentos:
+
+- Integração com Mercado Pago ou outro provedor compatível com Pix, crédito e débito.
+
+Notificações:
+
+- Push notifications para os clientes e administradores, com tratamento de permissões e compatibilidade com as plataformas.
+
+Segurança:
+
+- HTTPS
+- Autenticação segura
+- Controle de permissões por função
+- Políticas de acesso aos dados
+- Validação de preços no servidor
+- Proteção contra pedidos duplicados
+- Proteção contra alterações indevidas de pedidos
+- Segredos e credenciais exclusivamente no backend
+
+Se o ambiente de desenvolvimento não permitir gerar imediatamente um aplicativo nativo, construa o projeto com código-fonte organizado e preparado para compilação em APK Android e distribuição iOS.
+
+Não apresente um site comum dentro de um WebView como se fosse um aplicativo nativo completo.
+
+3. TELA INICIAL
+
+Utilize a imagem conceitual anexada como referência.
+
+Elementos:
+
+- Logotipo Super Bola Pizzaria
+- Saudação personalizada
+- Identificação de endereço de entrega
+- Indicador de estabelecimento aberto ou fechado
+- Campo de pesquisa
+- Carrinho com contador de produtos
+- Banner rotativo de promoções
+- Categorias com ícones
+- Produtos em destaque
+- Botão de entrega
+- Botão de retirada na loja
+- Barra de navegação inferior
+
+Categorias iniciais:
+
+1. Pizzas
+2. Refrigerantes
+3. Cervejas
+4. Combos
+5. Outros produtos
+
+Essas categorias deverão ser administráveis, permitindo criar, editar, ocultar ou excluir categorias conforme o cardápio real.
+
+A situação de aberto ou fechado deverá ser calculada com base no horário configurado pelo administrador, respeitando o fuso horário da pizzaria.
+
+4. CARDÁPIO DIGITAL
+
+O cardápio deverá ser carregado dinamicamente do banco de dados.
+
+Cada produto terá:
+
+- Nome
+- Descrição
+- Foto
+- Categoria
+- Preço
+- Tamanhos disponíveis
+- Adicionais
+- Disponibilidade
+- Destaque ou promoção
+- Ordem de exibição
+
+Os clientes poderão pesquisar produtos, navegar por categorias, visualizar detalhes e adicionar itens ao carrinho.
+
+Os preços apresentados nas imagens são ilustrativos. Não utilize esses valores como preços comerciais definitivos.
+
+O administrador deverá cadastrar o cardápio real posteriormente.
+
+5. MONTE SUA PIZZA
+
+Esta é uma das funcionalidades mais importantes do aplicativo.
+
+O cliente deverá conseguir personalizar a pizza de maneira simples e intuitiva.
+
+Etapa 1 — Escolha do tamanho
+
+Os tamanhos e suas características deverão ser configuráveis no painel administrativo.
+
+Exemplos iniciais:
+
+- Pequena
+- Média
+- Grande
+- Gigante
+
+Não presuma quantidades de fatias ou preços definitivos.
+
+Etapa 2 — Escolha dos sabores
+
+Permitir que o cliente escolha um ou mais sabores, conforme as regras de cada tamanho.
+
+Exemplo: pizza de dois sabores.
+
+O sistema deverá permitir ao administrador configurar:
+
+- Quantidade máxima de sabores por tamanho
+- Quais sabores estão disponíveis em cada tamanho
+- Preço de cada sabor por tamanho
+- Regra de cobrança de pizzas divididas
+
+A regra de cobrança poderá ser, por exemplo, o valor do sabor mais caro, mas deverá ser configurável e não presumida.
+
+Etapa 3 — Borda recheada
+
+Apresentar as bordas disponíveis, com preço adicional.
+
+Etapa 4 — Ingredientes adicionais
+
+Permitir selecionar adicionais, com cálculo automático.
+
+Etapa 5 — Observações
+
+Campo para instruções especiais, como retirar determinado ingrediente.
+
+Etapa 6 — Adicionar ao carrinho
+
+Exibir composição completa e preço final calculado de acordo com as regras comerciais.
+
+O backend deverá validar novamente todas as combinações e os preços.
+
+6. CARRINHO DE COMPRAS
+
+Permitir:
+
+- Adicionar produtos
+- Remover produtos
+- Alterar quantidades
+- Editar personalizações
+- Visualizar subtotal
+- Aplicar cupons válidos
+- Calcular taxa de entrega
+- Visualizar descontos
+- Visualizar total
+
+O carrinho deverá manter seus dados durante a navegação e recuperar informações de maneira segura quando apropriado.
+
+Nenhum valor enviado pelo aplicativo do cliente poderá ser considerado confiável sem validação pelo servidor.
+
+7. CADASTRO E ENDEREÇOS
+
+O cliente poderá:
+
+- Criar conta
+- Fazer login
+- Recuperar acesso
+- Informar nome e telefone
+- Cadastrar endereço
+- Salvar vários endereços
+- Consultar histórico de pedidos
+- Repetir pedidos anteriores
+
+O cadastro de endereço deverá permitir:
+
+- CEP
+- Rua
+- Número
+- Complemento
+- Bairro
+- Cidade
+- Estado
+- Referência
+
+Implementar consulta de CEP quando disponível, mantendo preenchimento manual como alternativa.
+
+O sistema deverá verificar se o endereço está dentro da área atendida pela pizzaria.
+
+8. ENTREGA E RETIRADA
+
+Oferecer duas modalidades:
+
+Entrega:
+
+- Endereço do cliente
+- Taxa de entrega
+- Previsão estimada
+- Observações para o entregador
+
+Retirada:
+
+- Endereço da pizzaria
+- Previsão de preparo
+- Retirada no balcão
+
+O administrador poderá configurar bairros atendidos, taxas, pedido mínimo, horários e prazos.
+
+Não invente endereço, área de entrega ou valores comerciais.
+
+9. PAGAMENTOS
+
+Implementar arquitetura preparada para integração real com um provedor de pagamentos, preferencialmente Mercado Pago.
+
+Métodos desejados:
+
+- Pix
+- Cartão de crédito
+- Cartão de débito
+- Dinheiro na entrega
+- Cartão na entrega
+
+Pix:
+
+Gerar uma cobrança real pelo backend, utilizando API oficial do provedor.
+
+Exibir QR Code e código Pix copia e cola.
+
+A confirmação deverá ocorrer por webhook seguro do provedor, com verificação da autenticidade e tratamento de eventos duplicados.
+
+Não considerar um pedido pago apenas porque o cliente clicou em "Já paguei".
+
+Cartões:
+
+Utilizar componentes seguros ou fluxo oficial do provedor.
+
+Não armazenar números completos de cartões, CVV ou outros dados sensíveis no banco de dados da pizzaria.
+
+Pagamento na entrega:
+
+Permitir dinheiro ou cartão, conforme opções habilitadas pelo administrador.
+
+Para dinheiro, permitir informar necessidade de troco.
+
+Manter separados o status do pagamento e o status operacional do pedido.
+
+Se credenciais de pagamento ainda não estiverem disponíveis, criar a integração em modo de teste e indicar claramente quais configurações são necessárias para ativação real.
+
+Nunca simular aprovação de pagamento como se fosse uma transação verdadeira.
+
+10. ACOMPANHAMENTO DO PEDIDO
+
+Após a confirmação, o cliente deverá visualizar o andamento em tempo real.
+
+Etapas:
+
+1. Pedido recebido
+2. Pedido aceito
+3. Em preparo
+4. No forno
+5. Pronto
+6. Saiu para entrega
+7. Entregue
+
+Para retirada, substituir as etapas de entrega pelas correspondentes.
+
+Também deverão existir estados para cancelamento e outras situações excepcionais.
+
+Exibir:
+
+- Número do pedido
+- Produtos
+- Total
+- Forma de pagamento
+- Horário
+- Previsão estimada
+- Status atualizado
+
+As atualizações deverão vir do backend, e não de uma animação fictícia com temporizador.
+
+O personagem Super Bola poderá aparecer em ilustrações e animações relacionadas às etapas do pedido.
+
+11. PAINEL ADMINISTRATIVO
+
+Desenvolver uma interface administrativa separada, com acesso protegido.
+
+Somente usuários autorizados poderão acessar dados operacionais e financeiros.
+
+O painel deverá apresentar:
+
+Dashboard:
+
+- Pedidos novos
+- Pedidos em preparo
+- Pedidos prontos
+- Pedidos em entrega
+- Pedidos concluídos
+- Faturamento do período
+- Quantidade de pedidos
+- Ticket médio
+
+Gerenciamento de pedidos:
+
+- Receber pedidos em tempo real
+- Emitir alerta visual e sonoro para novos pedidos
+- Visualizar produtos e observações
+- Aceitar ou recusar pedidos
+- Atualizar status
+- Informar previsão de preparo
+- Consultar endereço
+- Consultar modalidade de pagamento
+- Visualizar histórico
+- Imprimir comprovante ou pedido em formato apropriado
+
+O alerta sonoro deverá respeitar as permissões e limitações dos navegadores e dispositivos.
+
+Gerenciamento de produtos:
+
+- Criar
+- Editar
+- Excluir ou desativar
+- Alterar preços
+- Enviar fotografias
+- Criar categorias
+- Configurar tamanhos
+- Configurar sabores
+- Configurar bordas
+- Configurar adicionais
+- Criar combos
+- Definir promoções
+- Marcar produtos como indisponíveis
+
+Configurações:
+
+- Nome da pizzaria
+- Logotipo
+- Telefone
+- WhatsApp
+- Endereço
+- Horários
+- Taxas de entrega
+- Áreas atendidas
+- Pedido mínimo
+- Formas de pagamento
+- Tempo médio de preparo
+
+Relatórios:
+
+- Vendas por período
+- Produtos mais vendidos
+- Pedidos cancelados
+- Formas de pagamento
+- Valores recebidos
+- Histórico de movimentações
+
+Implementar permissões adequadas para administrador e funcionários.
+
+12. EXPERIÊNCIA DO USUÁRIO
+
+O aplicativo deverá ser rápido, intuitivo e visualmente agradável.
+
+Requisitos:
+
+- Interface responsiva
+- Animações leves
+- Indicadores de carregamento
+- Mensagens de erro compreensíveis
+- Confirmação antes de ações importantes
+- Feedback ao adicionar itens
+- Estados vazios bem desenhados
+- Acessibilidade
+- Botões com áreas de toque adequadas
+- Tratamento de conexão instável
+- Prevenção de pedidos duplicados
+
+Utilizar componentes reutilizáveis e arquitetura consistente.
+
+O personagem Super Bola deverá funcionar como elemento de identidade, sem ocupar espaço excessivo nas telas de compra.
+
+13. BANCO DE DADOS
+
+Projetar uma estrutura relacional adequada para:
+
+- Usuários
+- Perfis e permissões
+- Endereços
+- Categorias
+- Produtos
+- Tamanhos
+- Sabores
+- Opções de personalização
+- Regras de preços
+- Carrinhos
+- Pedidos
+- Itens de pedidos
+- Pagamentos
+- Eventos de pagamento
+- Histórico de status
+- Cupons
+- Configurações da pizzaria
+- Áreas de entrega
+- Horários de funcionamento
+
+Utilizar identificadores únicos, relacionamentos, validações e índices adequados.
+
+Preservar nos pedidos um registro dos nomes, preços e personalizações no momento da compra, para que alterações posteriores no cardápio não modifiquem o histórico.
+
+Implementar políticas de acesso para impedir que clientes visualizem pedidos de terceiros ou alterem informações administrativas.
+
+14. INSTALAÇÃO NO CELULAR
+
+O objetivo é entregar um aplicativo que possa ser instalado e utilizado em smartphones Android.
+
+Preparar o projeto para:
+
+- Compilação Android
+- Geração de APK de teste
+- Geração de AAB para publicação
+- Ícone oficial
+- Splash screen
+- Nome Super Bola Pizzaria
+- Permissões necessárias
+- Comunicação segura com o backend
+
+Preparar também a estrutura para uma futura versão iOS.
+
+Não afirmar que um APK foi gerado sem efetivamente disponibilizar o arquivo compilado.
+
+Caso o ambiente não permita compilar, fornecer o código-fonte completo e instruções exatas para realizar a compilação.
+
+15. QUALIDADE E TESTES
+
+Implementar e verificar os seguintes fluxos:
+
+1. Cliente navega pelo cardápio.
+2. Cliente personaliza uma pizza.
+3. Sistema calcula o preço corretamente.
+4. Cliente adiciona bebidas.
+5. Cliente informa endereço.
+6. Sistema calcula entrega.
+7. Cliente seleciona pagamento.
+8. Pedido é registrado no banco de dados.
+9. Administrador recebe o pedido.
+10. Administrador aceita e atualiza o status.
+11. Cliente acompanha as atualizações.
+12. Pedido é concluído.
+13. Histórico permanece disponível.
+14. Produtos e preços podem ser alterados pelo administrador.
+15. Pagamentos online são confirmados somente pelo provedor.
+
+Incluir tratamento de erros, testes de permissões e validação das regras de negócio.
+
+16. ENTREGA DO PROJETO
+
+Quero receber:
+
+- Aplicativo mobile do cliente
+- Painel administrativo funcional
+- Backend integrado
+- Banco de dados estruturado
+- Código-fonte organizado
+- Arquivos de configuração de exemplo
+- Instruções de instalação
+- Instruções para configurar pagamentos
+- Instruções para publicar o backend
+- Instruções para gerar APK
+- Orientações para publicação futura nas lojas
+- Documentação básica do funcionamento
+
+Não coloque chaves privadas ou credenciais reais no código-fonte.
+
+17. ORIENTAÇÕES IMPORTANTES
+
+Utilize as imagens anexadas como referência visual oficial.
+
+Não altere arbitrariamente o personagem, o logotipo ou a identidade da Super Bola Pizzaria.
+
+Não invente dados comerciais definitivos.
+
+Utilize dados de demonstração claramente identificados enquanto não forem fornecidos o cardápio, os preços, o endereço e as credenciais reais.
+
+Não entregue apenas páginas estáticas.
+
+Não utilize botões sem funcionalidade.
+
+Não simule pedidos concluídos sem persistência real.
+
+Não apresente integração de pagamentos fictícia como funcional.
+
+Se houver alguma limitação do ambiente, explique exatamente o que foi implementado, o que está pendente e como concluir.
+
+18. INÍCIO DO DESENVOLVIMENTO
+
+Comece analisando as imagens anexadas e definindo a estrutura técnica do projeto.
+
+Em seguida:
+
+1. Crie a arquitetura do aplicativo e do painel.
+2. Estruture o banco de dados.
+3. Desenvolva as telas conforme a identidade visual.
+4. Implemente o cardápio e a personalização de pizzas.
+5. Implemente carrinho e checkout.
+6. Conecte os pedidos ao backend.
+7. Desenvolva o painel administrativo.
+8. Implemente atualizações em tempo real.
+9. Prepare a integração de pagamentos.
+10. Teste o fluxo completo.
+11. Prepare a versão instalável para Android.
+
+Priorize entregar primeiro um fluxo completo e funcional de pedido, do cliente até o painel administrativo, antes de adicionar recursos secundários.
+
+Não interrompa o desenvolvimento apenas para apresentar ideias ou descrever o que poderia ser feito.
+
+OBJETIVO FINAL: um aplicativo de delivery profissional, visualmente fiel à marca Super Bola Pizzaria, com pedidos reais, gestão administrativa e estrutura preparada para operação comercial.

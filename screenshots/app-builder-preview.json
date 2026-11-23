@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Super Bola Pizzaria",
+      "hasCanvas": false,
+      "bodyTextLen": 36,
+      "bodyTextHash": "988b2604601bdf5933b164bc816e8c38fcb601f694faa2ecb0a012e94ce5ca0e",
+      "bodyTextPrefix": "Super Bola Pizzaria Abrindo o forno…",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Super Bola Pizzaria",
+      "hasCanvas": false,
+      "bodyTextLen": 117,
+      "bodyTextHash": "24d1dc46a8ba000373d910360692cb0a8cc9596369d0d81a7b5284642f4039b4",
+      "bodyTextPrefix": "Super Bola Pizzaria Monte sua pizza, peça entrega ou retirada e ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
