@@ -1,5 +1,6 @@
-import { readdirSync } from "node:fs";
-import { join } from "node:path";
+import { readdirSync, readFileSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { createRequire } from "node:module";
 import type { Plugin } from "vite";
 import { defineConfig } from "vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
@@ -30,6 +31,24 @@ function hasGlobbedMigrations(root: string): boolean {
  * migrations — no schema to apply — skips it entirely rather than paying for a
  * PGLite instance it never queries.
  */
+// Embed the binary assets in the server bundle rather than relying on runtime paths.
+function pgliteAssetsPlugin(): Plugin {
+  const id = "virtual:pglite-assets";
+  return {
+    name: "superbola:pglite-assets",
+    resolveId(source) { if (source === id) return "\0" + id; },
+    load(source) {
+      if (source !== "\0" + id) return;
+      const require = createRequire(import.meta.url);
+      const dir = dirname(require.resolve("@electric-sql/pglite"));
+      const assets = ["pglite.wasm", "initdb.wasm", "pglite.data"].map(
+        (name) => readFileSync(join(dir, name)).toString("base64"),
+      );
+      return "export default " + JSON.stringify(assets);
+    },
+  };
+}
+
 function pgliteBootstrapPlugin(): Plugin {
   return {
     name: "app-builder:pglite-bootstrap",
@@ -158,6 +177,7 @@ export default defineConfig(({ command, isPreview }) => ({
   },
   resolve: { tsconfigPaths: true },
   plugins: [
+    pgliteAssetsPlugin(),
     pgliteBootstrapPlugin(),
     // Before tanstackStart so /auth/popup never falls through to the SPA.
     authPopupPlugin(),
