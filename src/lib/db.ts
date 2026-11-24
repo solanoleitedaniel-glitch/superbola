@@ -111,7 +111,16 @@ async function createPgliteSql(): Promise<Sql> {
   // data survives source edits (it resets on dev-server restart).
   globalRef.__pgliteInstance__ ??= (async () => {
     const { PGlite } = await import("@electric-sql/pglite");
+    // @ts-ignore Virtual module supplied by Vite.
+    const { default: assets } = await import("virtual:pglite-assets");
+    const [pgliteWasmModule, initdbWasmModule] = await Promise.all([
+      WebAssembly.compile(Uint8Array.from(Buffer.from(assets[0], "base64"))),
+      WebAssembly.compile(Uint8Array.from(Buffer.from(assets[1], "base64"))),
+    ]);
     const pg = new PGlite({
+      pgliteWasmModule,
+      initdbWasmModule,
+      fsBundle: new Blob([Uint8Array.from(Buffer.from(assets[2], "base64"))]),
       parsers: {
         [OID_INT8]: Number,
         [OID_DATE]: identity,
