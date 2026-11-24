@@ -26,7 +26,9 @@ export function AccountPage() {
   return (
     <main className="px-4 py-4">
       <h1 className="text-2xl font-extrabold">Sua conta</h1>
-      <p className="text-sm font-semibold text-gold">{me.email}</p>
+      <p className="text-sm font-semibold text-gold">
+        {me.demo ? "Demonstração aberta. Nada de senha — é só navegar." : me.email}
+      </p>
       <form
         className="mt-4 grid gap-2"
         onSubmit={(event) => {
@@ -88,7 +90,7 @@ export function AccountPage() {
         )}
       </section>
 
-      {gate ? null : (
+      {gate || me.demo ? null : (
         <button type="button" className={`${btnBrand} mt-6`} onClick={() => void signOut().catch(() => toast.error("Não foi possível sair."))}>
           Sair da conta
         </button>

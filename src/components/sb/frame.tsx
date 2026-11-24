@@ -10,7 +10,6 @@ import {
   Tag,
 } from "lucide-react";
 import { Toaster } from "sonner";
-import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { getCatalog, getMe } from "@/lib/superbola/api";
 import { cartCount, useCart } from "@/lib/superbola/cart";
 import { errorText } from "@/lib/superbola/format";
@@ -41,23 +40,6 @@ function BootScreen() {
         <p className="mt-4 text-lg font-extrabold">Super Bola Pizzaria</p>
         <p className="mt-1 text-sm font-semibold text-gold">Abrindo o forno…</p>
       </div>
-    </main>
-  );
-}
-
-function Welcome() {
-  return (
-    <main className="mx-auto flex min-h-screen max-w-lg flex-col justify-center gap-6 bg-brand-deep px-6 py-10 text-cream">
-      <img src="/brand/mascote.png" alt="Super Bola Pizzaria" className="mx-auto h-52 w-52 rounded-3xl object-cover shadow-lg" />
-      <div>
-        <h1 className="text-3xl font-extrabold">Super Bola Pizzaria</h1>
-        <p className="mt-2 text-base font-semibold leading-relaxed text-cream">
-          Monte sua pizza, peça entrega ou retirada e acompanhe o pedido até a porta.
-        </p>
-      </div>
-      <Link to="/login" className="inline-flex h-14 items-center justify-center rounded-2xl bg-gold text-base font-extrabold text-ink">
-        Entrar ou criar conta
-      </Link>
     </main>
   );
 }
@@ -110,6 +92,14 @@ function SessionGate({ children, admin }: { children: ReactNode; admin: boolean 
     <SessionCtx.Provider value={{ me, catalog, error, refresh: () => setNonce((value) => value + 1) }}>
       <Toaster position="top-center" />
       <div className={admin ? "min-h-screen bg-cream text-ink" : "min-h-screen bg-brand-deep text-cream"}>
+        <div className={`bg-gold px-4 py-2 text-center text-xs font-extrabold leading-snug text-ink ${admin ? "" : "sticky top-0 z-30"}`}>
+          Demonstração sem senha.{" "}
+          {admin ? (
+            <Link to="/" className="underline">Voltar ao app do cliente</Link>
+          ) : (
+            <Link to="/admin" className="underline">Abrir o painel da pizzaria</Link>
+          )}
+        </div>
         <div className={admin ? "mx-auto min-h-screen max-w-5xl" : "mx-auto min-h-screen max-w-lg pb-24"}>
           {children}
         </div>
@@ -121,11 +111,7 @@ function SessionGate({ children, admin }: { children: ReactNode; admin: boolean 
 
 export function AppFrame({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const { user, isPending } = useCurrentUserState();
   if (pathname.startsWith("/login") || pathname.startsWith("/api")) return <>{children}</>;
-  if (isPending || !user) {
-    return isPending ? <BootScreen /> : <Welcome />;
-  }
   return <SessionGate admin={pathname.startsWith("/admin")}>{children}</SessionGate>;
 }
 
