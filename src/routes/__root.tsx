@@ -11,6 +11,12 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Super Bola Pizzaria" },
       { name: "theme-color", content: "#7A0000" },
+      { property: "og:title", content: "Super Bola Pizzaria" },
+      { property: "og:description", content: "Escolha sua pizza favorita, monte seu pedido e aproveite!" },
+      { property: "og:image", content: "https://superbola.vercel.app/og.jpg?v=2" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:type", content: "website" },
       {
         name: "description",
         content: "Peça na Super Bola Pizzaria. Monte sua pizza, acompanhe o pedido e retire ou receba em casa.",

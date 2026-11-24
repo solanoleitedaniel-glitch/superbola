@@ -1,5 +1,7 @@
 {
   "title": "Super Bola Pizzaria",
   "card": "custom",
-  "color": "D70000"
+  "color": "D70000",
+  "description": "Escolha sua pizza favorita, monte seu pedido e aproveite!",
+  "image": "/og.jpg"
 }
