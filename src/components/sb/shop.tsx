@@ -13,7 +13,7 @@ export function HomePage() {
   const navigate = useNavigate();
   const lines = useCart((state) => state.lines);
   const count = cartCount(lines);
-  const first = me?.demo || !me?.name ? "" : me.name.split(" ")[0];
+  const first = (me?.name || "cliente").split(" ")[0];
   const grande = catalog?.flavorPrices.filter((price) => price.sizeId === "size-g").map((price) => price.priceCents) ?? [];
   const from = grande.length ? Math.min(...grande) : 0;
   const hero = catalog?.products.find((product) => product.image)?.image || "/menu/calabresa.jpg";
@@ -51,7 +51,7 @@ export function HomePage() {
       <img src="/brand/mascote.png" alt="Super Bola Pizzaria" className="mx-auto mt-2 h-44 w-44 rounded-3xl object-cover shadow-lg" />
 
       <section className="px-4 pt-4">
-        <h1 className="text-4xl font-extrabold text-gold">Olá{first ? `, ${first}` : ""}!</h1>
+        <h1 className="text-4xl font-extrabold text-gold">Olá, {first}!</h1>
         <p className="mt-2 max-w-xs text-base font-semibold leading-snug">
           Faça seu pedido e aproveite as delícias da Super Bola.
         </p>
@@ -70,9 +70,6 @@ export function HomePage() {
         <p className="px-4 pt-3 text-sm font-semibold text-gold">Abertura manual ligada. O horário real está nos ajustes da loja.</p>
       ) : null}
 
-      <Link to="/admin" className="mx-4 mt-4 flex h-12 items-center justify-center rounded-2xl bg-gold text-sm font-extrabold text-ink">
-        Sou o dono — ver o painel da pizzaria
-      </Link>
       <div className="no-scroll mt-4 flex gap-3 overflow-x-auto px-4">
         {catalog.categories.map((category) => (
           <Link

@@ -57,7 +57,7 @@ export function AdminNav() {
           <img src="/brand/icone.png" alt="" className="h-12 w-12 rounded-2xl object-cover" />
           <div>
             <p className="text-lg font-extrabold">Painel Super Bola</p>
-            <p className="text-xs font-semibold text-gold">Demonstração — o dono vê pedidos, cardápio e relatórios</p>
+            <p className="text-xs font-semibold text-gold">Pedidos reais, em tempo quase real</p>
           </div>
         </div>
         <Link to="/" className="text-sm font-extrabold text-gold">Ver app</Link>

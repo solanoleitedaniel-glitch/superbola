@@ -1,6 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { accessMiddleware } from "@/lib/superbola/access";
-import { DEMO_USER_ID } from "@/lib/superbola/demo-id";
+import { authMiddleware } from "@/lib/auth/middleware";
 import {
   couponDiscount,
   priceItems,
@@ -346,7 +345,7 @@ function mapOrder(row: Record<string, unknown>) {
 }
 
 export const getMe = createServerFn({ method: "GET" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .handler(async ({ context }) => {
     const sql = await db();
     const users = await sql<{ name: string; email: string }>`select name, email from "user" where id = ${context.userId}`;
@@ -355,19 +354,17 @@ export const getMe = createServerFn({ method: "GET" })
     const profile = await sql<{ name: string; phone: string }>`select name, phone from profiles where user_id = ${context.userId}`;
     const staff = await sql<{ role: string }>`select role from staff where user_id = ${context.userId}`;
     const owners = await sql<{ user_id: string }>`select user_id from staff where role = 'owner' limit 1`;
-    const demo = context.userId === DEMO_USER_ID;
     return {
       name: profile[0]?.name || name,
       email: users[0]?.email ?? "",
       phone: profile[0]?.phone ?? "",
-      role: staff[0]?.role ?? (demo ? "staff" : null),
+      role: staff[0]?.role ?? null,
       storeClaimed: Boolean(owners[0]),
-      demo,
     };
   });
 
 export const updateProfile = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const name = str(data.name).trim().slice(0, 80);
@@ -382,7 +379,7 @@ export const updateProfile = createServerFn({ method: "POST" })
   });
 
 export const claimStore = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .handler(async ({ context }) => {
     const sql = await db();
     const owners = await sql<{ user_id: string }>`select user_id from staff where role = 'owner' limit 1`;
@@ -396,7 +393,7 @@ export const claimStore = createServerFn({ method: "POST" })
   });
 
 export const joinStaff = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -407,7 +404,7 @@ export const joinStaff = createServerFn({ method: "POST" })
   });
 
 export const listAddresses = createServerFn({ method: "GET" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .handler(async ({ context }) => {
     const sql = await db();
     const rows = await sql<Record<string, unknown>>`
@@ -428,7 +425,7 @@ export const listAddresses = createServerFn({ method: "GET" })
   });
 
 export const saveAddress = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const street = str(data.street).trim();
@@ -471,7 +468,7 @@ export const saveAddress = createServerFn({ method: "POST" })
   });
 
 export const deleteAddress = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -480,7 +477,7 @@ export const deleteAddress = createServerFn({ method: "POST" })
   });
 
 export const getCatalog = createServerFn({ method: "GET" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .handler(async () => {
     const sql = await db();
     const store = await readStore(sql, false);
@@ -502,7 +499,7 @@ export const getCatalog = createServerFn({ method: "GET" })
   });
 
 export const previewOrder = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -522,7 +519,7 @@ export const previewOrder = createServerFn({ method: "POST" })
   });
 
 export const placeOrder = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const clientToken = str(data.clientToken);
@@ -618,7 +615,7 @@ export const placeOrder = createServerFn({ method: "POST" })
   });
 
 export const listMyOrders = createServerFn({ method: "GET" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .handler(async ({ context }) => {
     const sql = await db();
     const rows = await sql<Record<string, unknown>>`
@@ -628,7 +625,7 @@ export const listMyOrders = createServerFn({ method: "GET" })
   });
 
 export const getOrder = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -645,7 +642,7 @@ export const getOrder = createServerFn({ method: "POST" })
   });
 
 export const cancelMyOrder = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -663,7 +660,7 @@ export const cancelMyOrder = createServerFn({ method: "POST" })
   });
 
 export const listAdminOrders = createServerFn({ method: "GET" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .handler(async ({ context }) => {
     const sql = await db();
     await requireStaff(sql, context.userId);
@@ -672,7 +669,7 @@ export const listAdminOrders = createServerFn({ method: "GET" })
   });
 
 export const setOrderStatus = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -717,7 +714,7 @@ export const setOrderStatus = createServerFn({ method: "POST" })
   });
 
 export const getAdminBundle = createServerFn({ method: "GET" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .handler(async ({ context }) => {
     const sql = await db();
     await requireStaff(sql, context.userId);
@@ -728,7 +725,7 @@ export const getAdminBundle = createServerFn({ method: "GET" })
   });
 
 export const saveSettings = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -779,7 +776,7 @@ export const saveSettings = createServerFn({ method: "POST" })
   });
 
 export const saveProduct = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -801,7 +798,7 @@ export const saveProduct = createServerFn({ method: "POST" })
   });
 
 export const createProduct = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -829,7 +826,7 @@ export const createProduct = createServerFn({ method: "POST" })
   });
 
 export const saveFlavorPrice = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -845,7 +842,7 @@ export const saveFlavorPrice = createServerFn({ method: "POST" })
   });
 
 export const saveNamedOption = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -873,7 +870,7 @@ export const saveNamedOption = createServerFn({ method: "POST" })
   });
 
 export const saveSize = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -886,7 +883,7 @@ export const saveSize = createServerFn({ method: "POST" })
   });
 
 export const saveZone = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -913,7 +910,7 @@ export const saveZone = createServerFn({ method: "POST" })
   });
 
 export const deleteZone = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -923,7 +920,7 @@ export const deleteZone = createServerFn({ method: "POST" })
   });
 
 export const saveCategory = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
@@ -942,7 +939,7 @@ export const saveCategory = createServerFn({ method: "POST" })
   });
 
 export const getReport = createServerFn({ method: "POST" })
-  .middleware([accessMiddleware])
+  .middleware([authMiddleware])
   .validator((input: unknown) => record(input))
   .handler(async ({ context, data }) => {
     const sql = await db();
